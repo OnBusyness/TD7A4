@@ -1,0 +1,25 @@
+version: '3'
+
+services :
+  mongodb:
+    image: cf5bc883c474
+    networks:
+    - my-network
+
+  web:
+    build: . 
+    container_name: cont
+    volumes:
+     - ./textfile.txt://app/textfile.txt
+    ports:
+     - "5500:5000"
+    depends_on:
+     - mongodb
+    networks:
+    - my-network
+
+networks:
+  my-network:
+     name: my-network
+
+
